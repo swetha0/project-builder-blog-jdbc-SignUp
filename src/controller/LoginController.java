@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import businesslogic.ValidateUser;
 import dao.UserDAO;
 import model.User;
+
+
 
 
 @WebServlet(urlPatterns= {"/login"})
@@ -33,21 +36,19 @@ public class LoginController extends HttpServlet {
 		String email = request.getParameter("email"); //  get the email value from the jsp/html page
 		String password = request.getParameter("password"); //  get the password value from the jsp/html page
 
-		// Fill your code
 		User user = new User();
+		UserDAO userdao = new UserDAO();
 		user.setEmail(email);
 		user.setPassword(password);
-		
-		UserDAO userdao = new UserDAO();
 		
 		boolean validateUser = false;
 		try {
 			validateUser = userdao.loginUser(user);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		if(validateUser) {
 			RequestDispatcher rd=this.getServletContext().getRequestDispatcher("/WEB-INF/views/blogView.jsp");
 			rd.forward(request, response);

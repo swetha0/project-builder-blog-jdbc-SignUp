@@ -2,7 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
-public class User{
+public class User
+{
 	private String email;
 	private String password;
 	private LocalDate date;

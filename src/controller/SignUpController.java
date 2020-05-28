@@ -17,7 +17,8 @@ import utility.ConnectionManager;
 @WebServlet(urlPatterns= {"/signup"})
 public class SignUpController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+       
+
     public SignUpController() {
         super();
        
@@ -38,18 +39,19 @@ public class SignUpController extends HttpServlet {
 		String confirmPassword = request.getParameter("confirmPassword"); //  get the confirm password value from the jsp/html page
 		LocalDate date= LocalDate.now(); // Java 8 Time API used to get system date and time at a particular instance
 		
-		// Fill your code here
 		User user = new User();
+		UserDAO userDao = new UserDAO();
+		
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setDate(date);
-		UserDAO userdao = new UserDAO();
-		
 		int checkUser = 0;
-		try {
-			checkUser = userdao.signUp(user);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		try 
+		{
+			checkUser = userDao.signUp(user);
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 		
